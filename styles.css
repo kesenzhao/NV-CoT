@@ -323,11 +323,12 @@ h1 em, h2 em { color: var(--acid); font-family: Georgia, "Times New Roman", seri
 .figure-split h3 { margin: 0 0 14px; font-size: 2.6rem; letter-spacing: -.05em; }
 .figure-split > div > p:last-child { color: #65706a; }
 .figure-split figure { margin: 0; padding: 16px; background: #f7f8f4; border: 1px solid rgba(13,21,18,.14); }
+.figure-split figure img { width: 100%; height: clamp(280px, 32vw, 380px); object-fit: cover; object-position: center; }
 .figure-split figcaption, .example-figure figcaption { margin-top: 12px; color: #737c77; font: .65rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .07em; }
 
 .examples { background: var(--paper); }
 .example-figure { max-width: 1120px; margin: 0 auto; padding: 14px; border: 1px solid var(--line); background: #fff; }
-.example-figure img { width: 100%; }
+.example-figure img { width: 100%; height: clamp(360px, 48vw, 540px); object-fit: cover; object-position: center; }
 .legend { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border-radius: 2px; }
 .legend.red { background: #f20d0d; }
 .legend.blue { background: #173dff; }
@@ -405,7 +406,7 @@ footer a:hover { color: var(--acid); }
   .chart-row { grid-template-columns: 84px 1fr 38px; gap: 8px; }
   .benchmark-chart > p { margin-left: 92px; }
   .example-figure { margin-inline: -8px; padding: 6px; overflow-x: auto; }
-  .example-figure img { min-width: 760px; }
+  .example-figure img { min-width: 760px; height: 440px; }
   .citation { gap: 42px; }
   pre { padding: 18px; font-size: .68rem; }
   footer { padding: 50px 20px; }
