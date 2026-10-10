@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="NV-CoT enables multimodal language models to reason with continuous numerical coordinates instead of textified boxes or fixed visual patches."
+    />
+    <meta name="theme-color" content="#0d1512" />
+    <meta property="og:title" content="NV-CoT — Numerical Visual Chain-of-Thought" />
+    <meta
+      property="og:description"
+      content="Thinking with images as continuous actions for precise, efficient visual reasoning."
+    />
+    <meta property="og:image" content="assets/teaser.jpg" />
+    <title>NV-CoT — Numerical Visual Chain-of-Thought</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="NV-CoT home">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>NV-CoT</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#idea">Idea</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+      <a class="header-cta" href="https://github.com/kesenzhao/NV-CoT" target="_blank" rel="noreferrer">
+        View code <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="coordinate-orbit orbit-a" aria-hidden="true">[x₁, y₁, x₂, y₂]</div>
+        <div class="coordinate-orbit orbit-b" aria-hidden="true">ℝ⁴ × ℝ₊</div>
+
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span> arXiv 2026 · Computer Vision</p>
+          <h1>
+            Thinking with images<br />
+            as <em>continuous actions.</em>
+          </h1>
+          <p class="hero-deck">
+            Numerical Visual Chain-of-Thought expands multimodal language models beyond discrete tokens—letting them point, zoom, and reason with precise numerical coordinates.
+          </p>
+
+          <div class="authors" aria-label="Authors">
+            <span>Kesen Zhao</span><span>Beier Zhu</span><span>Junbao Zhou</span>
+            <span>Xingyu Zhu</span><span>Zhongqi Yue</span><span>Hanwang Zhang</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button primary" href="https://arxiv.org/pdf/2602.23959" target="_blank" rel="noreferrer">
+              <span class="button-icon" aria-hidden="true">↓</span> Read paper
+            </a>
+            <a class="button secondary" href="https://github.com/kesenzhao/NV-CoT" target="_blank" rel="noreferrer">
+              <span class="button-icon" aria-hidden="true">⌘</span> Code
+            </a>
+            <a class="text-link" href="https://huggingface.co/kesenZhaoNTU/NVCoT-Qwen3-VL-8B-Joint-GRPO-Step32" target="_blank" rel="noreferrer">
+              Models <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal delay-1">
+          <div class="figure-window">
+            <div class="figure-bar">
+              <span>visual reasoning / three action spaces</span>
+              <span class="live-dot">continuous</span>
+            </div>
+            <img
+              src="assets/teaser.jpg"
+              alt="Comparison of text-based, patch-based, and numerical visual chain-of-thought, showing NV-CoT localizing a bottle with a continuous coordinate value."
+              width="2200"
+              height="462"
+            />
+          </div>
+          <p class="figure-caption"><span>Fig. 01</span> Coordinates are geometry—not words.</p>
+        </div>
+      </section>
+
+      <section class="marquee" aria-label="Paper highlights">
+        <div class="marquee-track">
+          <span>Continuous coordinates</span><i>✦</i><span>Gaussian / Laplace policy</span><i>✦</i>
+          <span>SFT + GRPO</span><i>✦</i><span>Minimal architecture change</span><i>✦</i>
+          <span>Continuous coordinates</span><i>✦</i><span>Gaussian / Laplace policy</span><i>✦</i>
+          <span>SFT + GRPO</span><i>✦</i><span>Minimal architecture change</span><i>✦</i>
+        </div>
+      </section>
+
+      <section class="section problem" id="idea">
+        <div class="section-heading reveal">
+          <p class="kicker">01 — The idea</p>
+          <h2>A coordinate should know<br />how <em>close</em> it is.</h2>
+          <p>
+            Text tokens flatten geometry. Fixed patches quantize it. NV-CoT keeps localization where it naturally lives: a continuous Euclidean action space.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <article class="comparison-card old reveal">
+            <div class="card-index">A</div>
+            <p class="card-label">Text-based visual CoT</p>
+            <div class="token-demo" aria-label="Coordinates fragmented into text tokens">
+              <span>“42”</span><span>“.”</span><span>“2”</span><span>“,”</span><span>“521”</span><span>“.”</span><span>“6”</span>
+            </div>
+            <h3>Geometry becomes language.</h3>
+            <p>Token cross-entropy ignores spatial proximity and fragments numbers into unrelated pieces.</p>
+          </article>
+
+          <article class="comparison-card old reveal delay-1">
+            <div class="card-index">B</div>
+            <p class="card-label">Patch-based visual CoT</p>
+            <div class="patch-demo" aria-label="A fixed four by four patch grid">
+              <i></i><i></i><i></i><i></i><i></i><i class="active"></i><i class="active"></i><i></i>
+              <i></i><i class="active"></i><i class="active"></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <h3>Reasoning snaps to a grid.</h3>
+            <p>Fixed visual granularity constrains precise region selection and often requires deeper model changes.</p>
+          </article>
+
+          <article class="comparison-card new reveal delay-2">
+            <div class="card-index">C</div>
+            <p class="card-label">NV-CoT · ours</p>
+            <div class="continuous-demo">
+              <div class="coordinate-box"><span></span></div>
+              <code>[42.2, 21.4, 522.6, 450.1]</code>
+            </div>
+            <h3>Point directly in ℝ⁴.</h3>
+            <p>A lightweight coordinate head predicts boxes as continuous actions, preserving geometric structure.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section method" id="method">
+        <div class="method-intro reveal">
+          <p class="kicker">02 — Method</p>
+          <h2>One model.<br /><em>Two action spaces.</em></h2>
+          <p>
+            NV-CoT retains the language vocabulary while adding a compact continuous head. The model can speak in tokens and act in coordinates—inside the same reasoning trajectory.
+          </p>
+        </div>
+
+        <div class="pipeline reveal delay-1" aria-label="NV-CoT pipeline">
+          <div class="pipeline-input">
+            <span class="node-tag">INPUT</span>
+            <div class="image-placeholder">
+              <div class="target-box"></div>
+              <span>image I₀</span>
+            </div>
+            <div class="query-chip">“What is he holding?”</div>
+          </div>
+
+          <div class="pipeline-arrow"><span>01</span></div>
+
+          <div class="model-node">
+            <span class="node-tag">MLLM π<sub>θ</sub></span>
+            <div class="model-core">
+              <i></i><i></i><i></i><i></i><i></i>
+              <strong>h ∈ ℝᴰ</strong>
+            </div>
+            <p>Shared hidden representation</p>
+          </div>
+
+          <div class="pipeline-arrow fork"><span>02</span></div>
+
+          <div class="output-stack">
+            <div class="output-node language">
+              <span class="node-tag">LANGUAGE</span>
+              <strong>p(token | h)</strong>
+              <small>categorical vocabulary</small>
+            </div>
+            <div class="output-node coordinates">
+              <span class="node-tag">COORDINATES</span>
+              <strong>μ = Wh</strong>
+              <small>Gaussian / Laplace policy</small>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow"><span>03</span></div>
+
+          <div class="action-node">
+            <span class="node-tag">ACTION</span>
+            <div class="distribution" aria-hidden="true"><span></span></div>
+            <code>b = μ + σε</code>
+            <p>sample → crop → inspect</p>
+          </div>
+        </div>
+
+        <div class="method-notes">
+          <article class="reveal">
+            <span>01</span>
+            <h3>Supervised fine-tuning</h3>
+            <p>Coordinate positions use a regression objective while language positions retain standard cross-entropy.</p>
+          </article>
+          <article class="reveal delay-1">
+            <span>02</span>
+            <h3>Reparameterized exploration</h3>
+            <p>The model predicts location and uncertainty, then samples differentiable coordinate actions.</p>
+          </article>
+          <article class="reveal delay-2">
+            <span>03</span>
+            <h3>GRPO compatible</h3>
+            <p>Analytic likelihood ratios and KL terms bring continuous actions into the standard RL pipeline.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section results" id="results">
+        <div class="section-heading light reveal">
+          <p class="kicker">03 — Results</p>
+          <h2>Sharper grounding.<br /><em>Stronger answers.</em></h2>
+          <p>
+            Across high-resolution reasoning benchmarks, replacing textified boxes with continuous actions improves both where the model looks and what it concludes.
+          </p>
+        </div>
+
+        <div class="metric-grid reveal delay-1">
+          <article class="metric-featured">
+            <p>BBox IoU · Vis-CoT-363K</p>
+            <div class="metric-number"><span data-count="59.5">59.5</span><small>%</small></div>
+            <div class="metric-comparison"><span>NV-CoT ℓ₁</span><strong>+12.2</strong><span>vs. Vis-CoT</span></div>
+          </article>
+          <article>
+            <p>V* Bench · overall</p>
+            <div class="metric-number"><span data-count="91.6">91.6</span></div>
+            <small>NV-CoT RL · multi-step</small>
+          </article>
+          <article>
+            <p>HR-Bench 4K · overall</p>
+            <div class="metric-number"><span data-count="76.0">76.0</span></div>
+            <small>NV-CoT RL · multi-step</small>
+          </article>
+          <article>
+            <p>HR-Bench 8K · overall</p>
+            <div class="metric-number"><span data-count="73.8">73.8</span></div>
+            <small>NV-CoT RL · multi-step</small>
+          </article>
+        </div>
+
+        <div class="benchmark-panel reveal">
+          <div class="benchmark-controls" role="tablist" aria-label="Benchmark results">
+            <button class="active" role="tab" aria-selected="true" data-benchmark="vstar">V* Bench</button>
+            <button role="tab" aria-selected="false" data-benchmark="hr4k">HR-Bench 4K</button>
+            <button role="tab" aria-selected="false" data-benchmark="hr8k">HR-Bench 8K</button>
+          </div>
+          <div class="benchmark-chart" data-chart>
+            <div class="chart-row">
+              <span>Base model</span>
+              <div class="bar-track"><i data-base-bar style="width: 86.4%"></i></div>
+              <strong data-base-value>86.4</strong>
+            </div>
+            <div class="chart-row ours">
+              <span>+ NV-CoT</span>
+              <div class="bar-track"><i data-ours-bar style="width: 89%"></i></div>
+              <strong data-ours-value>89.0</strong>
+            </div>
+            <p data-chart-note>Single-call RL setting · DeepEyes-7B backbone</p>
+          </div>
+        </div>
+
+        <div class="figure-split reveal">
+          <div>
+            <p class="kicker">Training dynamics</p>
+            <h3>Better, earlier.</h3>
+            <p>Continuous coordinate learning improves localization precision and reaches higher answer accuracy faster than text-coordinate baselines.</p>
+          </div>
+          <figure>
+            <img
+              src="assets/efficiency.jpg"
+              alt="Training curves comparing NV-CoT against Vis-CoT and DeepEyes for bounding-box IoU and final answer accuracy."
+              width="1600"
+              height="1037"
+              loading="lazy"
+            />
+            <figcaption>Localization precision and answer accuracy over training progress.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section examples" id="examples">
+        <div class="section-heading reveal">
+          <p class="kicker">04 — Qualitative results</p>
+          <h2>The right crop changes<br /><em>the answer.</em></h2>
+          <p>
+            NV-CoT selects tighter, semantically relevant regions across natural scenes, documents, spatial questions, and OCR-heavy examples.
+          </p>
+        </div>
+        <figure class="example-figure reveal delay-1">
+          <img
+            src="assets/examples.jpg"
+            alt="Four examples comparing NV-CoT region selections and answers against DeepEyes and Vis-CoT baselines."
+            width="1600"
+            height="1008"
+            loading="lazy"
+          />
+          <figcaption><span class="legend red"></span> NV-CoT &nbsp;&nbsp; <span class="legend blue"></span> baseline</figcaption>
+        </figure>
+      </section>
+
+      <section class="section abstract-section" id="paper">
+        <div class="abstract-index">05</div>
+        <div class="abstract-copy reveal">
+          <p class="kicker">Abstract</p>
+          <p class="abstract-lead">
+            Recent multimodal large language models increasingly rely on visual chain-of-thought for region-grounded reasoning. Yet existing methods either serialize coordinates as text—creating modality mismatch and semantic fragmentation—or operate on fixed-granularity visual patches.
+          </p>
+          <p>
+            NV-CoT expands the model action space from discrete vocabulary tokens to continuous numerical coordinates. With lightweight coordinate heads, Gaussian or Laplace policies, and reparameterized sampling, it supports both supervised fine-tuning and GRPO-style reinforcement learning. Experiments across three high-resolution benchmarks show improved localization, final-answer accuracy, and convergence speed.
+          </p>
+          <a class="text-link" href="https://arxiv.org/abs/2602.23959" target="_blank" rel="noreferrer">Read the full paper <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="section citation" id="citation">
+        <div class="citation-copy reveal">
+          <p class="kicker">06 — Citation</p>
+          <h2>Build on<br /><em>continuous vision.</em></h2>
+          <p>If NV-CoT helps your research, please cite the paper.</p>
+        </div>
+        <div class="code-block reveal delay-1">
+          <div class="code-header">
+            <span>BibTeX</span>
+            <button type="button" data-copy-citation>Copy citation</button>
+          </div>
+          <pre><code data-citation>@article{zhao2026thinking,
+  title={Thinking with Images as Continuous Actions:
+         Numerical Visual Chain-of-Thought},
+  author={Zhao, Kesen and Zhu, Beier and Zhou, Junbao
+          and Zhu, Xingyu and Yue, Zhongqi and Zhang, Hanwang},
+  journal={arXiv preprint arXiv:2602.23959},
+  year={2026}
+}</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-mark">NV<span>—</span>CoT</div>
+      <p>Numerical Visual Chain-of-Thought · 2026</p>
+      <div>
+        <a href="https://arxiv.org/abs/2602.23959" target="_blank" rel="noreferrer">Paper</a>
+        <a href="https://github.com/kesenzhao/NV-CoT" target="_blank" rel="noreferrer">Code</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>
