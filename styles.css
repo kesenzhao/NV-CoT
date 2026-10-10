@@ -327,8 +327,9 @@ h1 em, h2 em { color: var(--acid); font-family: Georgia, "Times New Roman", seri
 .figure-split figcaption, .example-figure figcaption { margin-top: 12px; color: #737c77; font: .65rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .07em; }
 
 .examples { background: var(--paper); }
-.examples .section-heading .single-line-heading { grid-column: 2 / -1; white-space: nowrap; font-size: clamp(2.1rem, 3.6vw, 3.8rem); }
-.examples .section-heading > p:last-child { grid-column: 2 / -1; max-width: 720px; }
+.examples .section-heading { grid-template-columns: 1fr; }
+.examples .section-heading .single-line-heading { grid-column: auto; white-space: nowrap; font-size: clamp(2.1rem, 3.3vw, 3.2rem); }
+.examples .section-heading > p:last-child { grid-column: auto; max-width: 720px; }
 .example-figure { max-width: 1120px; margin: 0 auto; padding: 14px; border: 1px solid var(--line); background: #fff; }
 .example-figure img { width: 100%; height: clamp(320px, 38vw, 420px); object-fit: fill; }
 .legend { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border-radius: 2px; }

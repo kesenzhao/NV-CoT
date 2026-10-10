@@ -28,6 +28,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a href="#idea">Idea</a>
+        <a href="#paper">Abstract</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
         <a href="#citation">Citation</a>
@@ -141,9 +142,23 @@
         </div>
       </section>
 
+      <section class="section abstract-section" id="paper">
+        <div class="abstract-index">02</div>
+        <div class="abstract-copy reveal">
+          <p class="kicker">02 — Abstract</p>
+          <p class="abstract-lead">
+            Recent multimodal large language models increasingly rely on visual chain-of-thought for region-grounded reasoning. Yet existing methods either serialize coordinates as text—creating modality mismatch and semantic fragmentation—or operate on fixed-granularity visual patches.
+          </p>
+          <p>
+            NV-CoT expands the model action space from discrete vocabulary tokens to continuous numerical coordinates. With lightweight coordinate heads, Gaussian or Laplace policies, and reparameterized sampling, it supports both supervised fine-tuning and GRPO-style reinforcement learning. Experiments across three high-resolution benchmarks show improved localization, final-answer accuracy, and convergence speed.
+          </p>
+          <a class="text-link" href="https://arxiv.org/abs/2602.23959" target="_blank" rel="noreferrer">Read the full paper <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
       <section class="section method" id="method">
         <div class="method-intro reveal">
-          <p class="kicker">02 — Method</p>
+          <p class="kicker">03 — Method</p>
           <h2>One model.<br /><em>Two action spaces.</em></h2>
           <p>
             NV-CoT retains the language vocabulary while adding a compact continuous head. The model can speak in tokens and act in coordinates—inside the same reasoning trajectory.
@@ -217,7 +232,7 @@
 
       <section class="section results" id="results">
         <div class="section-heading light reveal">
-          <p class="kicker">03 — Results</p>
+          <p class="kicker">04 — Results</p>
           <h2>Sharper grounding.<br /><em>Stronger answers.</em></h2>
           <p>
             Across high-resolution reasoning benchmarks, replacing textified boxes with continuous actions improves both where the model looks and what it concludes.
@@ -289,7 +304,7 @@
 
       <section class="section examples" id="examples">
         <div class="section-heading reveal">
-          <p class="kicker">04 — Qualitative results</p>
+          <p class="kicker">05 — Qualitative results</p>
           <h2 class="single-line-heading">The right crop changes <em>the answer.</em></h2>
           <p>
             NV-CoT selects tighter, semantically relevant regions across natural scenes, documents, spatial questions, and OCR-heavy examples.
@@ -305,20 +320,6 @@
           />
           <figcaption><span class="legend red"></span> NV-CoT &nbsp;&nbsp; <span class="legend blue"></span> baseline</figcaption>
         </figure>
-      </section>
-
-      <section class="section abstract-section" id="paper">
-        <div class="abstract-index">05</div>
-        <div class="abstract-copy reveal">
-          <p class="kicker">Abstract</p>
-          <p class="abstract-lead">
-            Recent multimodal large language models increasingly rely on visual chain-of-thought for region-grounded reasoning. Yet existing methods either serialize coordinates as text—creating modality mismatch and semantic fragmentation—or operate on fixed-granularity visual patches.
-          </p>
-          <p>
-            NV-CoT expands the model action space from discrete vocabulary tokens to continuous numerical coordinates. With lightweight coordinate heads, Gaussian or Laplace policies, and reparameterized sampling, it supports both supervised fine-tuning and GRPO-style reinforcement learning. Experiments across three high-resolution benchmarks show improved localization, final-answer accuracy, and convergence speed.
-          </p>
-          <a class="text-link" href="https://arxiv.org/abs/2602.23959" target="_blank" rel="noreferrer">Read the full paper <span aria-hidden="true">↗</span></a>
-        </div>
       </section>
 
       <section class="section citation" id="citation">
