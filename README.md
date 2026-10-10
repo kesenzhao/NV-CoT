@@ -1,5 +1,7 @@
 # Thinking with Images as Continuous Actions: Numerical Visual Chain-of-Thought
 
+[Paper](https://arxiv.org/abs/2602.23959) | [Project Page](https://kesenzhao.github.io/NV-CoT/)
+
 ## Updates
 
 - Added support for Qwen3-VL-2B and Qwen3-VL-8B.
