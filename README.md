@@ -1,7 +1,7 @@
 # [NeurIPS 2026 Oral] Thinking with Images as Continuous Actions: Numerical Visual Chain-of-Thought
 
 <p align="center">
-  <strong>NeurIPS 2026 Oral &middot; Top 0.4%</strong>
+  <img src="https://raw.githubusercontent.com/kesenzhao/NV-CoT/refs/heads/main/assets/neurips-2026-oral.svg" alt="NeurIPS 2026 Oral · Top 0.4%" width="320" height="24">
 </p>
 
 <p align="center">
