@@ -28,7 +28,7 @@ body {
 ::selection { color: var(--ink); background: var(--acid); }
 
 a { color: inherit; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 button, a { -webkit-tap-highlight-color: transparent; }
 
 .skip-link {
@@ -152,9 +152,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-.eyebrow { color: rgba(255,255,255,.66); }
-.eyebrow span { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 14px var(--acid); }
-.eyebrow strong { margin: 0 3px; padding: 4px 8px; border-radius: 999px; color: var(--ink); background: var(--acid); font: inherit; }
+.eyebrow { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; color: rgba(255,255,255,.8); font-size: clamp(1rem, 1.6vw, 1.375rem); line-height: 1.5; letter-spacing: .1em; }
+.eyebrow-dot { flex: 0 0 auto; width: 8px; height: 8px; margin-right: 4px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 14px var(--acid); }
+.eyebrow strong { margin: 0; padding: 3px 12px; border-radius: 999px; color: var(--ink); background: var(--acid); font: inherit; }
+.conference-name, .conference-ranking { white-space: nowrap; }
+.conference-ranking { color: var(--acid); letter-spacing: .06em; }
 
 h1, h2, h3, p { text-wrap: pretty; }
 h1 {
@@ -211,7 +213,7 @@ h1 em, h2 em { color: var(--acid); font-family: Georgia, "Times New Roman", seri
 .figure-bar { height: 42px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: rgba(255,255,255,.58); background: #16211e; font: 600 .65rem/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .1em; }
 .live-dot { color: var(--acid); }
 .live-dot::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--acid); }
-.figure-window img { width: 100%; }
+.figure-window img { width: 100%; height: auto; }
 .figure-caption { display: flex; gap: 18px; margin: 14px 4px 0; color: rgba(255,255,255,.54); font-size: .78rem; }
 .figure-caption span { color: var(--acid); font-family: ui-monospace, monospace; }
 
@@ -323,7 +325,7 @@ h1 em, h2 em { color: var(--acid); font-family: Georgia, "Times New Roman", seri
 .figure-split h3 { margin: 0 0 14px; font-size: 2.6rem; letter-spacing: -.05em; }
 .figure-split > div > p:last-child { color: #65706a; }
 .figure-split figure { margin: 0; padding: 16px; background: #f7f8f4; border: 1px solid rgba(13,21,18,.14); }
-.figure-split figure img { width: 100%; height: clamp(200px, 22vw, 280px);; object-fit: fill; }
+.figure-split figure img { width: 100%; height: auto; }
 .figure-split figcaption, .example-figure figcaption { margin-top: 12px; color: #737c77; font: .65rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .07em; }
 
 .examples { background: var(--paper); }
@@ -331,7 +333,7 @@ h1 em, h2 em { color: var(--acid); font-family: Georgia, "Times New Roman", seri
 .examples .section-heading .single-line-heading { grid-column: auto; white-space: nowrap; font-size: clamp(2.1rem, 3.3vw, 3.2rem); }
 .examples .section-heading > p:last-child { grid-column: auto; max-width: 720px; }
 .example-figure { max-width: 1120px; margin: 0 auto; padding: 14px; border: 1px solid var(--line); background: #fff; }
-.example-figure img { width: 100%; height: clamp(320px, 38vw, 420px); object-fit: fill; }
+.example-figure img { width: 100%; height: auto; }
 .legend { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border-radius: 2px; }
 .legend.red { background: #f20d0d; }
 .legend.blue { background: #173dff; }
@@ -393,10 +395,10 @@ footer a:hover { color: var(--acid); }
   .site-header { height: 62px; padding-inline: 20px; }
   .header-cta { font-size: .66rem; }
   .hero { padding: 120px 20px 64px; }
+  .eyebrow { gap: 8px; font-size: .9rem; letter-spacing: .06em; }
   h1 { font-size: clamp(3rem, 15vw, 4.3rem); }
   .hero-visual { margin-top: 64px; }
   .figure-window { border-radius: 10px; }
-  .figure-window img { min-height: 170px; object-fit: cover; object-position: center; }
   .section { padding: 84px 20px; }
   .section-heading { margin-bottom: 42px; }
   .examples .section-heading .single-line-heading { grid-column: auto; font-size: 5vw; }
@@ -410,8 +412,7 @@ footer a:hover { color: var(--acid); }
   .benchmark-chart { padding: 24px 16px; }
   .chart-row { grid-template-columns: 84px 1fr 38px; gap: 8px; }
   .benchmark-chart > p { margin-left: 92px; }
-  .example-figure { margin-inline: -8px; padding: 6px; overflow-x: auto; }
-  .example-figure img { min-width: 760px; height: 360px; }
+  .example-figure { margin-inline: -8px; padding: 6px; }
   .citation { gap: 42px; }
   pre { padding: 18px; font-size: .68rem; }
   footer { padding: 50px 20px; }
