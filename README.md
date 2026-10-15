@@ -1,9 +1,19 @@
-# Thinking with Images as Continuous Actions: Numerical Visual Chain-of-Thought
+# [NeurIPS 2026 Oral] Thinking with Images as Continuous Actions: Numerical Visual Chain-of-Thought
 
-[Paper](https://arxiv.org/abs/2602.23959) | [Project Page](https://kesenzhao.github.io/NV-CoT/)
+<p align="center">
+  <strong>NeurIPS 2026 Oral &middot; Top 0.4%</strong>
+</p>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2602.23959"><img src="https://img.shields.io/badge/arXiv-2602.23959-b31b1b.svg?logo=arxiv&logoColor=white" alt="arXiv paper" height="20"></a>
+  <a href="https://kesenzhao.github.io/NV-CoT/"><img src="https://img.shields.io/badge/Project-Page-0078D4.svg?logo=googlechrome&logoColor=white" alt="Project Page" height="20"></a>
+  <a href="https://huggingface.co/kesenZhaoNTU/NVCoT-Qwen3-VL-2B-Joint-GRPO-Step32"><img src="https://img.shields.io/badge/Hugging%20Face-2B-FFD21E.svg?logo=huggingface&logoColor=black" alt="Hugging Face 2B model" height="20"></a>
+  <a href="https://huggingface.co/kesenZhaoNTU/NVCoT-Qwen3-VL-8B-Joint-GRPO-Step32"><img src="https://img.shields.io/badge/Hugging%20Face-8B-FFD21E.svg?logo=huggingface&logoColor=black" alt="Hugging Face 8B model" height="20"></a>
+</p>
 
 ## Updates
 
+- 🎉 NV-CoT has been accepted to **NeurIPS 2026 as an Oral presentation (Top 0.4%)**!
 - Added support for Qwen3-VL-2B and Qwen3-VL-8B.
 - Optimized the architecture to support API-based judge models, improving training efficiency.
 - Added more numerical-head designs with support for contextual inputs.
